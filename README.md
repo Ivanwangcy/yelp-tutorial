@@ -34,3 +34,13 @@ $ vim .babelrc
 }
 ```
 ## Webpack 和 [hjs-webpack](https://github.com/HenrikJoreteg/hjs-webpack "webpack 启动器")
+```sh
+$ npm install --save-dev hjs-webpack webpack
+
+# loader 模块加载器
+$ npm install --save-dev {babel,css,style,postcss,url,file}-loader
+```
+## React
+```sh
+$ npm i -S react react-dom react-router
+```
