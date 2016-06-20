@@ -4,6 +4,7 @@
   "description": "React 项目示例。一步一步学习搭建React项目环境。 ## 快速启动项目 创建一个Node 项目。打开命令行终端，输入以下命令开始创建项目结构： ```sh $ mkdir yelp && cd $_ $ mkdir -p src/{components,containers,styles,utils,views}\\   && touch webpack.config.js ``` 初始化`package.json`，创建项目的依赖管理： ```sh $ npm init # 需要回答一系列问题",
   "main": "webpack.config.js",
   "scripts": {
+    "start": "NODE_ENV=development ./node_modules/.bin/hjs-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,6 +19,7 @@
   },
   "homepage": "https://github.com/Ivanwangcy/yelp-tutorial#readme",
   "devDependencies": {
+    "autoprefixer": "^6.3.6",
     "babel-core": "^6.9.1",
     "babel-loader": "^6.2.4",
     "babel-preset-es2015": "^6.9.0",
@@ -25,14 +27,18 @@
     "babel-preset-react-hmre": "^1.1.1",
     "babel-preset-stage-0": "^6.5.0",
     "css-loader": "^0.23.1",
+    "cssnano": "^3.7.1",
+    "dotenv": "^2.0.0",
     "file-loader": "^0.8.5",
     "hjs-webpack": "^8.2.0",
     "postcss-loader": "^0.9.1",
+    "precss": "^1.4.0",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
     "webpack": "^1.13.1"
   },
   "dependencies": {
+    "font-awesome": "^4.6.3",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "react-router": "^2.4.1"
