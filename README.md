@@ -178,3 +178,113 @@ config.resolve.alias = {
 }
 // end Roots
 ```
+## 配置 测试框架
+- karma is our test runner 自动化测试
+- chai is our expectation library
+- mocha as our test framework 测试框架
+- enzyme as a react testing helper
+- sinon as a spy, stub, and moch framework
+```sh
+$ npm i -D mocha chai enzyme chai-enzyme expect sinon babel-register babel-polyfill react-addons-test-utils
+$ npm i -D json-loader
+
+# karma
+$ npm i -D karma karma-chai karma-mocha karma-webpack
+$ npm i -D karma-sourcemap-loader
+#
+# $ npm install -g karma-cli
+# $ npm i -D karma karma-chai karma-mocha karma-webpack karma-phantomjs-launcher phantomjs-prebuilt phantomjs-polyfill
+
+```
+创建 karma.conf.js
+```javascript
+var webpackConfig = require('./webpack.config')
+module.exports = function(config) {
+  config.set({
+    basePath: '',
+    frameworks: ['mocha', 'chai'],
+    files: [
+     'tests.webpack.js'
+     ],
+
+     preprocessors: {
+       // add webpack as preprocessor
+       'tests.webpack.js': ['webpack', 'sourcemap'],
+     },
+
+     webpack: webpackConfig,
+     webpackServer: {
+       noInfo: true
+     },
+    plugins: [
+      'karma-mocha',
+      'karma-chai',
+      'karma-webpack',
+      'karma-sourcemap-loader'
+    ],
+    // webpack 配置
+    webpack: webpackConfig,
+    webpackServer: {
+     noInfo: true
+    },
+    // webpack end
+    files: [ ],
+    exclude: [ ],
+    preprocessors: { },
+    reporters: ['progress'],
+    port: 9876,
+    colors: true,
+    logLevel: config.LOG_INFO,
+    autoWatch: true,
+    browsers: ['Chrome'],
+    singleRun: false,
+    concurrency: Infinity
+  })
+}
+
+```
+创建 tests.config.js
+```javascript
+require('babel-polyfill');
+// some setup first
+
+var chai = require('chai');
+var chaiEnzyme = require('chai-enzyme');
+
+chai.use(chaiEnzyme())
+
+var context = require.context('./src', true, /\.spec\.js$/);
+context.keys().forEach(context);
+
+```
+修改 webpack.config.js
+```javascript
+// Testing
+if (isTest) {
+  config.externals = {
+    'react/addons': true,
+    'react/lib/ReactContext': true,
+    'react/lib/ExecutionEnvironment': true,
+  }
+  config.module.noParse = /[/\\]sinon\.js/;
+  config.resolve.alias['sinon'] = 'sinon/pkg/sinon';
+
+  config.plugins = config.plugins.filter(p => {
+    const name = p.constructor.toString();
+    const fnName = name.match(/^function (.*)\((.*\))/)
+
+    const idx = [
+      'DedupePlugin',
+      'UglifyJsPlugin'
+    ].indexOf(fnName[1]);
+    return idx < 0;
+  })
+}
+// End Testing
+```
+创建测试文件  App.spec.js
+```sh
+# 启动测试
+$ NODE_ENV=test \
+   ./node_modules/karma/bin/karma start karma.conf.js
+```
