@@ -288,3 +288,7 @@ if (isTest) {
 $ NODE_ENV=test \
    ./node_modules/karma/bin/karma start karma.conf.js
 ```
+## React Map
+```sh
+$ npm install --save google-maps-react
+```

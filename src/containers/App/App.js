@@ -7,18 +7,18 @@ import styles from './styles.module.css';
 class App extends Component {
 
   static propTypes = {
-    history: PropTypes.object.isRequired,
+    // history: PropTypes.object.isRequired,
     routers: PropTypes.object.isRequired
   }
 
-  get content() {
-    return (
-      <Router
-        history={this.props.history}
-        routers={this.props.routers}
-        />
-    );
-  }
+  // get content() {
+  //   return (
+  //     <Router
+  //       history={this.props.history}
+  //       routers={this.props.routers}
+  //       />
+  //   );
+  // }
 
   render() {
     return (
@@ -28,7 +28,7 @@ class App extends Component {
       //     Environment: {__NODE_ENV__}</h1>
       // </div>
       <div style={{height: '100%'}}>
-        {this.content}
+        {this.props.routers}
       </div>
 
     )

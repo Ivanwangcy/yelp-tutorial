@@ -6,9 +6,11 @@ import 'font-awesome/css/font-awesome.css';
 import {browserHistory} from 'react-router';
 
 import App from './containers/App/App';
+import routers from './routers';
 
-console.log(styles);
+// console.log(routers);
 
+// var routers = makeRouters()
 // class App extends Component{
 //   render() {
 //     return (
@@ -21,4 +23,4 @@ console.log(styles);
 // };
 
 const mountNode = document.querySelector('#root');
-ReactDOM.render(<App history={browserHistory}/>, mountNode);
+ReactDOM.render(<App routers={routers}/>, mountNode);
